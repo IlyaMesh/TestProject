@@ -1,0 +1,11 @@
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/changelog.xml
+    drop-first: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cashDB
+    username: user
+    password: pass
+
+

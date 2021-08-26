@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+    <changeSet id="create-card-table" author="imescheryakov">
+        <createTable tableName="card">
+            <column name="card_id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="card_pk"/>
+            </column>
+            <column name="card_number" type="varchar(16)">
+                <constraints unique="true"/>
+            </column>
+            <column name="pin" type="varchar(4)"/>
+            <column name="is_locked" type="boolean"/>
+            <column name="card_balance" type="number"/>
+        </createTable>
+    </changeSet>
+<changeSet id="create-sequence-for-card" author="imescheryakov">
+    <createSequence sequenceName="seq_card"/>
+</changeSet>
+    <changeSet id="add-operations-names-table" author="imescheryakov">
+        <createTable tableName="operation_name">
+            <column name="op_code" type="number">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="operations_names_pk"/>
+            </column>
+            <column name="op_name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_operation_table" author="imescheryakov">
+        <createTable tableName="operation">
+            <column name="operation_id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="operation_pk"/>
+            </column>
+            <column name="op_time" type="time"/>
+            <column name ="paid_sum" type="number"/>
+            <column name="op_code" type="number">
+                <constraints nullable="false" foreignKeyName="operation_code_fk" references="operation_name(op_code)"/>
+            </column>
+            <column name="card_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="operation_card_fk" references="card(card_id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="fill-operations-name-table" author="imescheryakov">
+        <insert tableName="operation_name">
+            <column name="op_code" value="001"/>
+            <column name="op_name" value="Balance"/>
+        </insert>
+        <insert tableName="operation_name">
+            <column name="op_code" value="002"/>
+            <column name="op_name" value="Withdraw money"/>
+        </insert>
+    </changeSet>
+    <changeSet id="add-test-card" author="imescheryakov">
+        <insert tableName="card">
+            <column name="card_number" value="0000111122223333"/>
+            <column name="pin" value="0000"/>
+            <column name="is_locked" valueBoolean="false"/>
+            <column name="card_balance" value="1000"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+        function add(val) {
+            var value = document.getElementById('cardNumber').value
+            if (value.length == 4 || value.length == 9 || value.length == 14) {
+                value += "-";
+            }
+            if (value.length < 19) {
+                value += val;
+            }
+            document.getElementById('cardNumber').value = value;
+        }
+
+        function clearField() {
+            document.getElementById('cardNumber').value = "";
+        }
+    </script>
+    <title>Cash Machine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Введите шестнадцатизначный номер карты</h3>
+<input type="button" onclick="add(this.value)" value="0">
+<input type="button" onclick="add(this.value)" value="1">
+<input type="button" onclick="add(this.value)" value="2">
+<input type="button" onclick="add(this.value)" value="3">
+<input type="button" onclick="add(this.value)" value="4">
+<input type="button" onclick="add(this.value)" value="5">
+<input type="button" onclick="add(this.value)" value="6">
+<input type="button" onclick="add(this.value)" value="7">
+<input type="button" onclick="add(this.value)" value="8">
+<input type="button" onclick="add(this.value)" value="9">
+<input type="button" onclick="clearField()" value="Очистить">
+<form method="post">
+    <input type="text" readonly id="cardNumber" name="cardNumber" maxlength="19" placeholder="xxxx-xxxx-xxxx-xxxx"
+           pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}">
+    <p><input type="submit" value="OK" />
+</form>
+</body>
+</html>

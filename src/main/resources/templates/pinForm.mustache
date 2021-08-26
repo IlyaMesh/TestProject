@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+        function add(val) {
+            var value = document.getElementById('pin').value
+            if (value.length < 4) {
+                document.getElementById('pin').value += val;
+            }
+        }
+        function clearField() {
+            document.getElementById('pin').value = "";
+        }
+    </script>
+    <title>Cash Machine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Введите пин-код</h3>
+<input type="button" onclick="add(this.value)" value="0">
+<input type="button" onclick="add(this.value)" value="1">
+<input type="button" onclick="add(this.value)" value="2">
+<input type="button" onclick="add(this.value)" value="3">
+<input type="button" onclick="add(this.value)" value="4">
+<input type="button" onclick="add(this.value)" value="5">
+<input type="button" onclick="add(this.value)" value="6">
+<input type="button" onclick="add(this.value)" value="7">
+<input type="button" onclick="add(this.value)" value="8">
+<input type="button" onclick="add(this.value)" value="9">
+<input type="button" onclick="clearField()" value="Очистить">
+<form method="post">
+    <input type="hidden" name="cardNumber" value="{{cardNumber}}"/>
+    <input type="password" readonly id="pin" name="pin" maxlength="4" placeholder="****">
+    <p><input type="submit" value="OK" />
+</form>
+<a href="#" onclick="javascript:window.history.back(-1);return false;">Выход</a>
+</body>
+</html>
